@@ -149,7 +149,7 @@ describe("Land and House CMS Success", () => {
       .contains(normalize("รูป Floor Plan"))
       .parent()
       .find("input[type='file']")
-      .attachFile("Floor.jpg");
+      .attachFile("plan-home.png");
 
     //Type house detail TH
     cy.get("div.text-label")
@@ -180,8 +180,8 @@ describe("Land and House CMS Success", () => {
       .contains(normalize("Remark"))
       .parent()
       .find("textarea")
-      .type("หมายเหตุทดสอบแบบบ้าน99")
-      .should("have.value", "หมายเหตุทดสอบแบบบ้าน99");
+      .type("หมายเหตุทดสอบแบบบ้านสำหรับเทส cypress")
+      .should("have.value", "หมายเหตุทดสอบแบบบ้านสำหรับเทส cypress");
 
     //save button
     cy.get("button.cursor-pointer.bg-primary.self-center")
