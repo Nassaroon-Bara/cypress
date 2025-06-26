@@ -76,12 +76,51 @@ describe("Land and House CMS Success", () => {
       .find("input")
       .click();
 
-    // select date
-    cy.get(".ant-picker-dropdown") // modal calendar
-      .contains(".ant-picker-cell-inner", "31")
+    //select start date in calendar example 2025-06-01
+    cy.get(".ant-picker-cell-inner").contains("1").click();
+
+    //click to open calendar
+    cy.get("div.text-label")
+      .contains(normalize("สิ้นสุด Event วันที่"))
+      .parent()
+      .find("input")
       .click();
 
-    // เช็คว่าค่าใน input เปลี่ยนแล้ว
-    cy.get(".ant-picker input").should("have.value", "31-05-2025");
+    //select end date in calendar example 2025-06-26
+    cy.get(".ant-picker-cell-inner").last().contains("2").click();
+
+    //upload photo
+    cy.get("div.text-label")
+      .contains(normalize("รูปภาพ*"))
+      .parent()
+      .find("input[type='file']")
+      .attachFile("test-event-photo.jpg");
+
+    //click to save button
+    cy.get("button").contains(normalize("บันทึกข้อมูล")).click();
+
+    //check success message photo uploaded
+    cy.get("div.ant-message-notice-content")
+      .find("div>span")
+      .contains(normalize("อัปโหลดรูปภาพสำเร็จ"))
+      .should("exist");
+
+    //check success message cteate event success
+    cy.get("div.ant-message-notice-content")
+      .find("div>span")
+      .contains(normalize("เพิ่ม Event สำเร็จ"))
+      .should("exist");
+
+    //check url redirect to project event page
+    cy.url().should("include", "/v2/event/project-events");
+
+    //check is project events created exist and click edit button
+    // cy.get("table")
+    //   .find("tr>td")
+    //   .contains(eventName)
+    //   .should("exist")
+    //   .parent()
+    //   .find("button>img[src='/images/icons/EditIcon.svg']")
+    //   .click();
   });
 });
