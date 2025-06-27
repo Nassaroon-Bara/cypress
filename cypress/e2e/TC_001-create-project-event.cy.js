@@ -112,15 +112,16 @@ describe("Land and House CMS Success", () => {
       .should("exist");
 
     //check url redirect to project event page
+    cy.wait(1000);
     cy.url().should("include", "/v2/event/project-events");
 
     //check is project events created exist and click edit button
-    // cy.get("table")
-    //   .find("tr>td")
-    //   .contains(eventName)
-    //   .should("exist")
-    //   .parent()
-    //   .find("button>img[src='/images/icons/EditIcon.svg']")
-    //   .click();
+    cy.get("table")
+      .find("tr>td")
+      .contains(eventName)
+      .should("exist")
+      .parent()
+      .find("button>img[src='/images/icons/EditIcon.svg']")
+      .click();
   });
 });
