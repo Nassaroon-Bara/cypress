@@ -19,13 +19,14 @@ describe("login-Farmer", () => {
     //   "extfarmerworker.poultry@gmail.com"
     // );
     cy.visit("https://blmsmobileuat.betagro.com/th/login");
+    cy.wait(1000);
 
+    cy.get("input[id='อีเมล หรือ ชื่อผู้ใช้']").should("be.visible");
     cy.get("label")
       .contains(normalize("อีเมล หรือ ชื่อผู้ใช้"))
       .parent()
       .find("input")
       .first()
-
       .type("extfarmerworker.poultry@gmail.com");
     // .type("test");
 
