@@ -23,5 +23,7 @@ export default defineConfig({
     // testIsolation: false,
     experimentalRunAllSpecs: true,
     baseUrl: "https://blmsmobileuat.betagro.com",
+    viewportWidth: 1440,
+    viewportHeight: 810,
   },
 });
