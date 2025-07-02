@@ -42,6 +42,25 @@ describe("login-Farmer", () => {
     cy.get("button").contains(normalize("เข้าสู่ระบบ")).click();
 
     // should br url https://blmsmobileuat.betagro.com/th/owner?
-    cy.url().should("include", "/th/owner?");
+    cy.wait(1000);
+    cy.url().should("include", "/th/owner");
+
+    // click menu อาหาร
+    cy.wait(15000);
+    cy.get('[data-dd-action-name="poultry_feed"]').click();
+
+    // should br url https://blmsmobileuat.betagro.com/th/owner/activity?tab=feed
+    cy.url().should("include", "/th/owner/activity?tab=feed");
+    cy.wait(1000);
+
+    // click เพิ่มรายการบันทึก
+    cy.get("button").contains(normalize("เพิ่มรายการบันทึก")).click();
+    cy.wait(1000);
+
+    cy.get("div.flex")
+      .contains(normalize("โรงเรือน"))
+      .parent()
+      .find(".react-select-16-input")
+      .click();
   });
 });
