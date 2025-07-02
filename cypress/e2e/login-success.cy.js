@@ -24,11 +24,13 @@ describe("Land and House CMS Success", () => {
 
     //section 1 -------------------------------------------------------------------------------------
     // Click project type
+    const propertyType = "บ้านคู่"; // สร้างตัวแปรสำหรับกำหนดประเภทสินค้าเพื่อนำไปใช้หลายจุดหรือใช้ในการเช็ค
     cy.get("div.text-label")
       .contains(normalize("กำหนดประเภทสินค้า"))
       .parent()
       .find(".ant-select")
       .click();
+
     cy.get("div.text-label")
       .contains(normalize("กำหนดประเภทสินค้า"))
       .parent()
@@ -37,10 +39,11 @@ describe("Land and House CMS Success", () => {
 
     // Select "บ้านคู่"
     cy.get(".ant-select-item-option-content")
-      .contains(normalize("บ้านคู่"))
+      .contains(normalize(propertyType))
       .click();
 
     // Click House style
+    const HouseStyle = "GRACEFUL SERIES"; // สร้างตัวแปรสำหรับกำหนดสไตล์บ้านเพื่อนำไปใช้หลายจุดหรือใช้ในการเช็ค
     cy.get("div.text-label")
       .contains(normalize("เลือกสไตล์บ้าน"))
       .parent()
@@ -52,12 +55,13 @@ describe("Land and House CMS Success", () => {
       .find(".ant-select-selection-search")
       .click();
 
-    // Select Style "MANTANA 100"
-    cy.get(".ant-select-item-option-content").contains("I NATURE").click();
+    // Select Style "GRACEFUL SERIES"
+    cy.get(".ant-select-item-option-content")
+      .contains("GRACEFUL SERIES")
+      .click();
 
     //Type code house model
-    const houseModelCode =
-      "TestHouseModel" + Math.floor(Math.random() * 1000000);
+    const houseModelCode = "รหัสแบบบ้าน" + Math.floor(Math.random() * 1000000);
     cy.get("div.text-label")
       .contains(normalize("เลขรหัสของแบบบ้านคู่ (ตัวอย่าง : 312BL)"))
       .parent()
@@ -65,13 +69,15 @@ describe("Land and House CMS Success", () => {
       .type(houseModelCode);
 
     //type name house model
+    const HouseModelName = "แบบบ้านทดสอบ" + Math.floor(Math.random() * 1000000);
     cy.get("div.text-label")
       .contains(normalize("ชื่อแบบบ้านคู่"))
       .parent()
       .find("input")
-      .type("บ้านคู่ทดสอบ" + Math.floor(Math.random() * 1000000));
+      .type(HouseModelName);
 
     //select type model
+    const ModelType = "แบบบ้านกลาง"; // สร้างตัวแปรสำหรับกำหนดประเภทสินค้าเพื่อนำไปใช้
     cy.get("div.text-label")
       .contains(normalize("แบบบ้านนี้ใช้กับโครงการใดได้บ้าง"))
       .parent()
@@ -80,6 +86,7 @@ describe("Land and House CMS Success", () => {
       .click();
 
     //section 2 -------------------------------------------------------------------------------------
+    const HouseArea = "50.05"; // สร้างตัวแปรสำหรับกำหนดพื้นที่บ้านเพื่อนำไปใช้
     cy.get("div.text-label")
       .contains(normalize("พื้นที่ใช้สอย"))
       .parent()
@@ -89,6 +96,7 @@ describe("Land and House CMS Success", () => {
     //section 3 -------------------------------------------------------------------------------------
 
     //Enter Number Room
+    const NumberBedroom = "3"; // สร้างตัวแปรสำหรับกำหนดจำนวนห้องเพื่อนำไปใช้
     cy.get("div.items-center>div")
       .contains(normalize("ห้องนอน"))
       .parent()
@@ -96,6 +104,7 @@ describe("Land and House CMS Success", () => {
       .type("3")
       .should("have.value", "3");
 
+    const NumberBathroom = "2"; // สร้างตัวแปรสำหรับกำหนดจำนวนห้องเพื่อนำไปใช้
     //Enter Number Bathroom
     cy.get("div.items-center>div")
       .contains(normalize("ห้องน้ำ"))
@@ -121,6 +130,7 @@ describe("Land and House CMS Success", () => {
       .should("exist");
 
     //Upload house model image inside
+    const PhotoInside = "home-test.jpg"; // สร้างตัวแปรสำหรับกำหนดพื้นที่บ้านเพื่อนำไปใช้
     cy.get("div.text-label")
       .contains(normalize("ภาพภายใน"))
       .parent()
@@ -137,6 +147,7 @@ describe("Land and House CMS Success", () => {
     //section 5 Floor -------------------------------------------------------------------------------------
 
     //type floor
+    const Floor = "1"; // สร้างตัวแปรสำหรับกำหนดพื้นที่บ้านเพื่อนำไปใช้
     cy.get("div.text-label")
       .contains(normalize("ชั้นที่"))
       .parent()
@@ -152,6 +163,7 @@ describe("Land and House CMS Success", () => {
       .attachFile("plan-home.png");
 
     //Type house detail TH
+    const HouseDetailTH = "ทดสอบรายละเอียดแบบบ้านTH"; // สร้างตัวแปรสำหรับกำหนดพื้นที่บ้านเพื่อนำไปใช้
     cy.get("div.text-label")
       .contains(normalize("รายละเอียด (th)"))
       .parent()
@@ -160,6 +172,7 @@ describe("Land and House CMS Success", () => {
       .should("have.value", "ทดสอบรายละเอียดแบบบ้านTH");
 
     //Type house detail EN
+    const HouseDetailEN = "TestDetailPlanEN"; // สร้างตัวแปรสำหรับกำหนดพื้นที่บ้านเพื่อนำไปใช้
     cy.get("div.text-label")
       .contains(normalize("รายละเอียด (en)"))
       .parent()
@@ -168,6 +181,7 @@ describe("Land and House CMS Success", () => {
       .should("have.value", "TestDetailPlanEN");
 
     //Type house detail zh
+    const HouseDetailZH = "测试房屋模型"; // สร้างตัวแปรสำหรับกำหนดพื้นที่บ้านเพื่อนำไปใช้
     cy.get("div.text-label")
       .contains(normalize("รายละเอียด (zh)"))
       .parent()
@@ -187,6 +201,39 @@ describe("Land and House CMS Success", () => {
     cy.get("button.cursor-pointer.bg-primary.self-center")
       .contains("บันทึก")
       .click();
+
+    //select button to select option VDO file
+    const VdoFile = "VDO File"; // สร้างตัวแปรสำหรับกำหนดประเภทสินค้าเพื่อนำไปใช้
+    cy.get("div.text-label")
+      .contains(normalize("เลือกชนิดของการอัปโหลดไฟล์"))
+      .parent()
+      .find("button")
+      .contains(normalize("VDO File"))
+      .click();
+
+    //upload thumbnail VDO file
+    cy.get("div.text-label")
+      .contains(normalize("Thumbnail VDO"))
+      .parent()
+      .find("input[type='file']")
+      .attachFile("home-test.jpg");
+
+    //image should be exist
+    cy.get("div.text-label")
+      .contains(normalize("Thumbnail VDO"))
+      .parent()
+      .find("img")
+      .should("exist");
+
+    //upload VDO file
+    cy.get("div.text-label")
+      .contains(normalize("VDO File"))
+      .parent()
+      .find("input[type='file']")
+      .attachFile("test-video.mp4");
+
+    //VDO should be exist
+    cy.contains("test-video.mp4").should("exist");
 
     //sumbit button
     cy.get("button.flex.justify-center.items-center")
@@ -211,9 +258,123 @@ describe("Land and House CMS Success", () => {
       .find("button>img[src='/images/icons/EditIcon.svg']")
       .click();
 
+    // section check data -------------------------------------------------------------------------------------
     //Check is url redirect to edit house model page using regx ID is any string
     //example : https://lh-cms-uat.codemonday.io/v2/house-model/{ID}/edit
     // cy.url().should("match", /\/v2\/house-model\/[a-zA-Z0-9]{24}\/edit$/);
     cy.url().should("include", "/v2/house-model/").should("include", "/edit");
+
+    //check is house model code exist
+    cy.get("div.text-label")
+      .contains(normalize("กำหนดประเภทสินค้า"))
+      .parent()
+      .find(".ant-select-selection-item") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element ที่อยู่ตำแหน่งที่ 1
+      .should("have.text", normalize(propertyType));
+
+    cy.get("div.text-label")
+      .contains(normalize("กำหนดประเภทสินค้า"))
+      .parent()
+      .find(".ant-select-selection-item") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element ที่อยู่ตำแหน่งที่ 1
+      .should("have.text", normalize(propertyType));
+
+    cy.get("div.text-label")
+      .contains(normalize("เลือกสไตล์บ้าน"))
+      .parent()
+      .find(".ant-select-selection-item") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element ที่อยู่ตำแหน่งที่ 1
+      .should("have.text", normalize(HouseStyle));
+
+    cy.get("div.text-label")
+      .contains(normalize("เลขรหัสของแบบบ้านคู่ (ตัวอย่าง : 312BL)"))
+      .parent()
+      .find("input") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element ที่อยู่ตำแหน่งที่ 1
+      .should("have.value", normalize(houseModelCode));
+
+    cy.get("div.text-label")
+      .contains(normalize("ชื่อแบบบ้านคู่"))
+      .parent()
+      .find("input") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element ที่อยู่ตำแหน่งที่ 1
+      .should("have.value", normalize(HouseModelName));
+
+    cy.get("div.text-label")
+      .contains(normalize("แบบบ้านนี้ใช้กับโครงการใดได้บ้าง"))
+      .parent()
+      .find("button") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element ที่อยู่ตำแหน่งที่ 1
+      .should("have.text", normalize(ModelType));
+
+    cy.get("div.text-label")
+      .contains(normalize("พื้นที่ใช้สอย"))
+      .parent()
+      .find("input") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element ที่อยู่ตำแหน่งที่ 1
+      .should("have.value", normalize(HouseArea));
+
+    cy.get("div.items-center>div")
+      .contains(normalize("ห้องนอน"))
+      .parent()
+      .find("input") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element ที่อยู่ตำแหน่งที่ 1
+      .should("have.value", normalize(NumberBedroom));
+
+    cy.get("div.items-center>div")
+      .contains(normalize("ห้องน้ำ"))
+      .parent()
+      .find("input") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element ที่อยู่ตำแหน่งที่ 1
+      .should("have.value", normalize(NumberBathroom));
+
+    cy.get("div.text-label")
+      .contains(normalize("ภาพภายนอก"))
+      .parent()
+      .find("img[alt='upload-preview']")
+      .should("have.attr", "src")
+      .and("not.be.empty");
+
+    cy.get("div.text-label")
+      .contains(normalize("ภาพภายใน"))
+      .parent()
+      .find("img[alt='upload-preview']")
+      .should("have.attr", "src")
+      .and("not.be.empty");
+
+    cy.get("div.text-label")
+      .contains(normalize("ชั้นที่"))
+      .parent()
+      .find("input") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element ที่อยู่ตำแหน่งที่ 1
+      .should("have.value", normalize(Floor));
+
+    cy.get("div.text-label")
+      .contains(normalize("รูป Floor Plan"))
+      .parent()
+      .find("img[alt='upload-preview']")
+      .should("have.attr", "src")
+      .and("not.be.empty");
+
+    cy.get("div.text-label")
+      .contains(normalize("รายละเอียด (th)"))
+      .parent()
+      .find("textarea") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element ที่อยู่ตำแหน่งที่ 1
+      .should("have.value", normalize(HouseDetailTH));
+
+    cy.get("div.text-label")
+      .contains(normalize("รายละเอียด (en)"))
+      .parent()
+      .find("textarea") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element ที่อยู่ตำแหน่งที่ 1
+      .should("have.value", normalize(HouseDetailEN));
+
+    cy.get("div.text-label")
+      .contains(normalize("รายละเอียด (zh)"))
+      .parent()
+      .find("textarea") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element ที่อยู่ตำแหน่งที่ 1
+      .should("have.value", normalize(HouseDetailZH));
   });
 });
