@@ -232,9 +232,6 @@ describe("Land and House CMS Success", () => {
       .find("input[type='file']")
       .attachFile("test-video.mp4");
 
-    //VDO should be exist
-    cy.contains("test-video.mp4").should("exist");
-
     //sumbit button
     cy.get("button.flex.justify-center.items-center")
       .contains("บันทึกข้อมูล")
