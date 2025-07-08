@@ -78,7 +78,7 @@ describe("Land and House CMS Success", () => {
 
     //select start date in calendar example 2025-06-01
     cy.get(".ant-picker-cell-inner").contains("1").click();
-
+    // cy.wait(2000);
     //click to open calendar
     cy.get("div.text-label")
       .contains(normalize("สิ้นสุด Event วันที่"))
@@ -87,7 +87,8 @@ describe("Land and House CMS Success", () => {
       .click();
 
     //select end date in calendar example 2025-06-26
-    cy.get(".ant-picker-cell-inner").last().contains("2").click();
+    // cy.get(".ant-picker-cell-inner").last().contains("10").click();
+    cy.get(".ant-picker-cell-inner").contains("3").click();
 
     //upload photo
     cy.get("div.text-label")
