@@ -87,8 +87,12 @@ describe("Land and House CMS Success", () => {
       .click();
 
     //select end date in calendar example 2025-06-26
+<<<<<<< Updated upstream
     // cy.get(".ant-picker-cell-inner").last().contains("10").click();
     cy.get(".ant-picker-cell-inner").contains("3").click();
+=======
+    cy.get(".ant-picker-cell-inner").last().contains("30").click();
+>>>>>>> Stashed changes
 
     //upload photo
     cy.get("div.text-label")
