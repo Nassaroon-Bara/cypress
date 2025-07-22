@@ -190,6 +190,7 @@ describe("Land and House CMS Success", () => {
       .should("have.value", "测试房屋模型");
 
     //Type Remark
+    const Remark = "หมายเหตุทดสอบแบบบ้านสำหรับเทส cypress"; // สร้างตัวแปรสำหรับกำหนดพื้นที่บ้านเพื่อนำไปใช้
     cy.get("div.text-label")
       .contains(normalize("Remark"))
       .parent()
@@ -202,35 +203,47 @@ describe("Land and House CMS Success", () => {
       .contains("บันทึก")
       .click();
 
-    //select button to select option VDO file
-    const VdoFile = "VDO File"; // สร้างตัวแปรสำหรับกำหนดประเภทสินค้าเพื่อนำไปใช้
+    //select button to select option VDO youtube
+    const VDOYoutube = "VDO Youtube"; // สร้างตัวแปรสำหรับกำหนดประเภทสินค้าเพื่อนำไปใช้
     cy.get("div.text-label")
       .contains(normalize("เลือกชนิดของการอัปโหลดไฟล์"))
       .parent()
       .find("button")
-      .contains(normalize("VDO File"))
+      .contains(normalize("VDO Youtube"))
       .click();
 
-    //upload thumbnail VDO file
+    //upload thumbnail VDO Youtube
+    const ThumbnailVDO = "home-test.jpg"; // สร้างตัวแปรสำหรับกำหนดพื้นที่บ้านเพื่อนำไปใช้
     cy.get("div.text-label")
-      .contains(normalize("Thumbnail VDO"))
+      .contains(normalize("Thumbnail Youtube"))
       .parent()
       .find("input[type='file']")
       .attachFile("home-test.jpg");
 
-    //image should be exist
-    cy.get("div.text-label")
-      .contains(normalize("Thumbnail VDO"))
-      .parent()
-      .find("img")
-      .should("exist");
+    //enter url Youtube
+    const url = "https://youtu.be/4k5849123";
+    // cy.get("div.text-label")
+    //   .contains("URL Youtube")
+    //   .parent()
+    //   .find("input")
+    //   .type("https://youtu.be/4k5849123")
+    //   .should("have.value", "https://youtu.be/4k5849123");
 
-    //upload VDO file
     cy.get("div.text-label")
-      .contains(normalize("VDO File"))
+      .contains("URL Youtube")
       .parent()
-      .find("input[type='file']")
-      .attachFile("test-video.mp4");
+      .find("input")
+      .clear()
+      .type("https://youtu.be/4k5849123", { delay: 100 })
+      .blur()
+      .should("have.value", url);
+
+    // //upload VDO file
+    // cy.get("div.text-label")
+    //   .contains(normalize("VDO File"))
+    //   .parent()
+    //   .find("input[type='file']")
+    //   .attachFile("test-video.mp4");
 
     //sumbit button
     cy.get("button.flex.justify-center.items-center")
@@ -373,5 +386,33 @@ describe("Land and House CMS Success", () => {
       .find("textarea") // หา element ที่มีข้อมูลที่ต้องการหา
       .first() //หา element ที่อยู่ตำแหน่งที่ 1
       .should("have.value", normalize(HouseDetailZH));
+
+    cy.get("div.text-label")
+      .contains(normalize("Remark"))
+      .parent()
+      .find("textarea") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element ที่อยู่ตำแหน่งที่ 1
+      .should("have.value", normalize(Remark));
+
+    cy.get("div.text-label")
+      .contains(normalize("เลือกชนิดของการอัปโหลดไฟล์"))
+      .parent()
+      .find("button")
+      .contains("VDO Youtube")
+      .should("have.text", VDOYoutube);
+
+    cy.get("div.text-label")
+      .contains("Thumbnail Youtube")
+      .parent()
+      .find("img[alt='upload-preview']")
+      .should("have.attr", "src")
+      .and("not.be.empty");
+
+    cy.get("div.text-label")
+      .contains("URL Youtube")
+      .parent()
+      .find("input") // หา element ที่มีข้อมูลที่ต้องการหา
+      .should("have.value", url)
+      .and("not.be.empty");
   });
 });

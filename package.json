@@ -12,5 +12,8 @@
   "devDependencies": {
     "cypress": "^14.3.3",
     "cypress-file-upload": "^5.0.8"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13"
   }
 }
