@@ -71,7 +71,7 @@ describe("Land and House CMS Success", () => {
       .find("input")
       .type("https://lh-uat.codemonday.io/th");
 
-    //click to open calendar
+    // click to open calendar select StartDate
     cy.get("div.text-label")
       .contains(normalize("เริ่มต้น Event วันที่"))
       .parent()
@@ -79,25 +79,38 @@ describe("Land and House CMS Success", () => {
       .click();
 
     // //select start date in calendar example 2025-06-01
-    cy.get(".ant-picker-cell-inner").contains("22").click();
-    //cy.wait(2000);
+    const targetDate = new Date();
+    const startDate = targetDate.getDate();
+    const startDateString =
+      startDate >= 10 ? String(startDate) : "0" + startDate;
+    const startMonth = targetDate.getMonth() + 1;
+    const startMonthString =
+      startMonth >= 10 ? String(startMonth) : "0" + startMonth;
+    const startYearString = targetDate.getFullYear().toString();
+    const startString =
+      startDateString + "/" + startMonthString + "/" + startYearString;
 
-    //click to open calendar
+    // targetDate.setDate(targetDate.getDate() + 7); // เลือกอีก 7 วันข้างหน้า
+    // const endDate = targetDate.getDate();
+    // const endDateString = endDate >= 10 ? String(endDate) : "0" + endDate;
+    // const endMonth = targetDate.getMonth() + 1;
+    // const endMonthString = endMonth >= 10 ? String(endMonth) : "0" + endMonth;
+    // const endYearString = targetDate.getFullYear().toString();
+    // const endString =
+    //   endDateString + "/" + endMonthString + "/" + endYearString;
+    cy.get(".ant-picker-cell-inner").contains(startDate).click();
+
+    // click to open calendar select endDate
     // cy.get("div.text-label")
     //   .contains(normalize("สิ้นสุด Event วันที่"))
     //   .parent()
     //   .find("input")
     //   .last()
     //   .click();
-
+    // cy.get(".ant-picker-cell-in-view").contains(startDate).click();
     // // select end date in calendar example 2025-06-26
     // cy.get(".ant-picker-cell-inner").last().contains("31").click();
     // // cy.get(".ant-picker-cell-inner").contains("31").click();
-
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 7); // เลือกอีก 7 วันข้างหน้า
-    const day = targetDate.getDate().toString();
-    cy.contains(".ant-picker-cell-inner", day).click();
 
     //upload photo
     cy.get("div.text-label")
@@ -166,33 +179,33 @@ describe("Land and House CMS Success", () => {
       .first() //หา element
       .should("have.value", normalize(eventUrl));
 
-    // //check start date is correct
-    // cy.get("div.text-label")
-    //   .contains(normalize("เริ่มต้น Event วันที่"))
-    //   .parent()
-    //   .find("input") // หา element ที่มีข้อมูลที่ต้องการหา
-    //   .first() //หา element
-    //   .should("have.value", normalize("31/07/2025"));
-
-    // //check end date is correct
-    // cy.get("div.text-label")
-    //   .contains(normalize("สิ้นสุด Event วันที่"))
-    //   .parent()
-    //   .find("input") // หา element ที่มีข้อมูลที่ต้องการหา
-    //   .first() //หา element
-    //   .should("have.value", normalize("22/07/2025"));
-
+    //check start date is correct
     cy.get("div.text-label")
       .contains(normalize("เริ่มต้น Event วันที่"))
       .parent()
-      .find("input")
-      .should("have.value", normalize("29/06/2025"));
+      .find("input") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element
+      .should("have.value", normalize(startString));
 
+    //check end date is correct
     cy.get("div.text-label")
       .contains(normalize("สิ้นสุด Event วันที่"))
       .parent()
-      .find("input")
-      .should("have.value", normalize("22/07/2025"));
+      .find("input") // หา element ที่มีข้อมูลที่ต้องการหา
+      .first() //หา element
+      .should("have.value", normalize(startString));
+
+    // cy.get("div.text-label")
+    //   .contains(normalize("เริ่มต้น Event วันที่"))
+    //   .parent()
+    //   .find("input")
+    //   .should("have.value", normalize("29/06/2025"));
+
+    // cy.get("div.text-label")
+    //   .contains(normalize("สิ้นสุด Event วันที่"))
+    //   .parent()
+    //   .find("input")
+    //   .should("have.value", normalize("22/07/2025"));
 
     //check photo is correct
     cy.get("div.text-label")
