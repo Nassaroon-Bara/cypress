@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 const normalize = (str) => str.normalize("NFC");
 
-describe("test-bot-reCHAPTCHA", () => {
+describe("test-bot-reCAPTCHA", () => {
   before(() => {
     // ทำงานก่อนเริ่มชุดเทสต์ทั้งหมด
     cy.log("Start test suite");
@@ -52,9 +52,11 @@ describe("test-bot-reCHAPTCHA", () => {
       normalize("test_user", { delay: 150 })
     );
     cy.get('textarea[placeholder="พิมพ์ข้อความที่นี่..."]').type(
-      normalize("ทดสอบ reCHAPTCHA", { delay: 200 })
+      normalize("ทดสอบ reCAPTCHA", { delay: 200 })
     );
     //submit button
     cy.get("button").contains(normalize("ส่งข้อมูล")).click();
+
+    //
   });
 });
